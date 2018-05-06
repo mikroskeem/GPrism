@@ -40,7 +40,7 @@ dwsync.xml
 intermediate
 publish
 .idea
-
+.gradle
 
 # Eclipse stuff
 .classpath
