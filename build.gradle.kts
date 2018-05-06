@@ -12,14 +12,15 @@ repositories {
     mavenLocal()
     mavenCentral()
 
-    maven("https://hub.spigotmc.org/nexus/content/repositories/snapshots/")
+    maven("https://repo.destroystokyo.com/content/repositories/snapshots/")
+    maven("https://oss.sonatype.org/content/repositories/snapshots/")
     maven("http://maven.sk89q.com/repo/")
 }
 
 dependencies {
     implementation("org.apache.tomcat:tomcat-jdbc:7.0.52")
 
-    compileOnly("org.spigotmc:spigot-api:1.12-R0.1-SNAPSHOT")
+    compileOnly("com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT")
     compileOnly("com.sk89q:worldedit:6.0.0-SNAPSHOT")
 }
 
