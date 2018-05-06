@@ -144,12 +144,12 @@ public class ReportCommand implements SubHandler {
                 + RecordingManager.failedDbConnectionCount ) );
         sender.sendMessage( Prism.messenger.playerMsg( "Actions in queue: " + ChatColor.WHITE
                 + RecordingQueue.getQueueSize() ) );
-        sender.sendMessage( Prism.messenger.playerMsg( "Pool active: " + ChatColor.WHITE + Prism.getPool().getActive() ) );
-        sender.sendMessage( Prism.messenger.playerMsg( "Pool idle: " + ChatColor.WHITE + Prism.getPool().getIdle() ) );
-        sender.sendMessage( Prism.messenger.playerMsg( "Pool active count: " + ChatColor.WHITE
-                + Prism.getPool().getNumActive() ) );
-        sender.sendMessage( Prism.messenger.playerMsg( "Pool idle count: " + ChatColor.WHITE
-                + Prism.getPool().getNumIdle() ) );
+        //sender.sendMessage( Prism.messenger.playerMsg( "Pool active: " + ChatColor.WHITE + Prism.getPool().getActive() ) );
+        //sender.sendMessage( Prism.messenger.playerMsg( "Pool idle: " + ChatColor.WHITE + Prism.getPool().getIdle() ) );
+        //sender.sendMessage( Prism.messenger.playerMsg( "Pool active count: " + ChatColor.WHITE
+        //        + Prism.getPool().getNumActive() ) );
+        //sender.sendMessage( Prism.messenger.playerMsg( "Pool idle count: " + ChatColor.WHITE
+        //        + Prism.getPool().getNumIdle() ) );
 
         boolean recorderActive = false;
         if( plugin.recordingTask != null ) {

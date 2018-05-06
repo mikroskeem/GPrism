@@ -4,6 +4,7 @@ import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.bukkit.WorldEditPlugin;
 
 import com.helion3.prism.libs.elixr.MaterialAliases;
+import com.zaxxer.hikari.HikariDataSource;
 import me.botsko.prism.actionlibs.*;
 import me.botsko.prism.appliers.PreviewSession;
 import me.botsko.prism.bridge.PrismBlockEditHandler;
@@ -22,7 +23,6 @@ import me.botsko.prism.players.PrismPlayer;
 import me.botsko.prism.purge.PurgeManager;
 import me.botsko.prism.wands.Wand;
 
-import org.apache.tomcat.jdbc.pool.DataSource;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -52,7 +52,7 @@ public class Prism extends JavaPlugin {
     /**
      * Connection Pool
      */
-    private static volatile DataSource pool = new DataSource();
+    private static volatile HikariDataSource pool = null;
 
     /**
      * Protected/private
@@ -307,9 +307,9 @@ public class Prism extends JavaPlugin {
      * 
      * @return
      */
-    public DataSource initDbPool() {
+    public HikariDataSource initDbPool() {
 
-        DataSource pool = null;
+        HikariDataSource pool;
 
         final String dns = "jdbc:mysql://" + config.getString( "prism.mysql.hostname" ) + ":"
                 + config.getString( "prism.mysql.port" ) + "/" + config.getString( "prism.mysql.database" ) 
@@ -318,20 +318,20 @@ public class Prism extends JavaPlugin {
                 + "&verifyServerCertificate=" + ( config.getBoolean( "prism.mysql.verify-server-certificate" ) ? "true" : "false")
                 + "&useSSL=" + ( config.getBoolean( "prism.mysql.use-ssl" ) ? "true" : "false")
                 + "&useCursorFetch=" + ( config.getBoolean( "prism.mysql.use-cursor-fetch" ) ? "true" : "false");;
-        pool = new DataSource();
+        pool = new HikariDataSource();
         pool.setDriverClassName( "com.mysql.jdbc.Driver" );
-        pool.setUrl( dns );
+        pool.setJdbcUrl(dns);
         pool.setUsername( config.getString( "prism.mysql.username" ) );
         pool.setPassword( config.getString( "prism.mysql.password" ) );
-        pool.setInitialSize( config.getInt( "prism.database.pool-initial-size" ) );
-        pool.setMaxActive( config.getInt( "prism.database.max-pool-connections" ) );
-        pool.setMaxIdle( config.getInt( "prism.database.max-idle-connections" ) );
-        pool.setMaxWait( config.getInt( "prism.database.max-wait" ) );
-        pool.setRemoveAbandoned( true );
-        pool.setRemoveAbandonedTimeout( 180 );
-        pool.setTestOnBorrow( true );
-        pool.setValidationQuery( "/* ping */SELECT 1" );
-        pool.setValidationInterval( 30000 );
+        //pool.setInitialSize( config.getInt( "prism.database.pool-initial-size" ) );
+        pool.setMaximumPoolSize(config.getInt( "prism.database.max-pool-connections" ));
+        //pool.setMaxIdle( config.getInt( "prism.database.max-idle-connections" ) );
+        //pool.setMaxWait( config.getInt( "prism.database.max-wait" ) );
+        //pool.setRemoveAbandoned( true );
+        //pool.setRemoveAbandonedTimeout( 180 );
+        //pool.setTestOnBorrow( true );
+        pool.setConnectionTestQuery("/* ping */SELECT 1");
+        //pool.setValidationInterval( 30000 );
 
         return pool;
     }
@@ -352,7 +352,7 @@ public class Prism extends JavaPlugin {
      * 
      * @return
      */
-    public static DataSource getPool() {
+    public static HikariDataSource getPool() {
         return Prism.pool;
     }
 

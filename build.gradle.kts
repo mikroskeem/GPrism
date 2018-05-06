@@ -18,7 +18,9 @@ repositories {
 }
 
 dependencies {
-    implementation("org.apache.tomcat:tomcat-jdbc:7.0.52")
+    implementation("com.zaxxer:HikariCP:3.1.0") {
+        exclude(module = "slf4j-api") // Present in Paper
+    }
 
     compileOnly("com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT")
     compileOnly("com.sk89q:worldedit:6.0.0-SNAPSHOT")
@@ -41,6 +43,5 @@ val processResources by tasks.getting(ProcessResources::class) {
 }
 
 val shadowJar by tasks.getting(ShadowJar::class) {
-    relocate("org.apache.tomcat.jdbc", "com.helion3.prism.libs.org.apache.tomcat.jdbc")
-    relocate("org.apache.juli", "com.helion3.prism.libs.org.apache.juli")
+    relocate("com.zaxxer.hikari", "com.helion3.prism.libs.com.zaxxer.hikari")
 }
