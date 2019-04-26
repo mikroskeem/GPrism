@@ -1,8 +1,8 @@
 name:        ${project.name}
 version:     ${project.version}
 description: ${project.description}
-authors:     [viveleroi, Jikoo, Siggi88, PavelM, PhanaticD, RoyCurtis]
-website:     https://github.com/Gamealition/GPrism
+authors:     [viveleroi, Jikoo, Siggi88, PavelM, PhanaticD, RoyCurtis, mikroskeem]
+website:     https://github.com/mikroskeem/GPrism
 main:        me.botsko.prism.Prism
 softdepend:  [WorldEdit,HeroChat]
 

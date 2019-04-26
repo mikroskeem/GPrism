@@ -2,7 +2,7 @@ import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
     java
-    id("com.github.johnrengelman.shadow") version "2.0.2"
+    id("com.github.johnrengelman.shadow") version "5.0.0"
 }
 
 group = "eu.mikroskeem"
@@ -26,6 +26,7 @@ dependencies {
     compileOnly("com.sk89q:worldedit:6.0.0-SNAPSHOT")
 }
 
+// Note: I would use net.minecrell.plugin-yml.bukkit, but... Goddamnit look at plugin.yml
 val processResources by tasks.getting(ProcessResources::class) {
     val tokens = mapOf(
             "project.name" to "Prism",
