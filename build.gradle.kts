@@ -8,6 +8,10 @@ plugins {
 group = "eu.mikroskeem"
 version = "1.12-2.0.12"
 
+val paperApiVersion = "1.12.2-R0.1-SNAPSHOT"
+val worldEditVersion = "6.0.0-SNAPSHOT"
+val hikariCpVersion = "3.3.1"
+
 repositories {
     mavenLocal()
     mavenCentral()
@@ -18,12 +22,12 @@ repositories {
 }
 
 dependencies {
-    implementation("com.zaxxer:HikariCP:3.1.0") {
+    implementation("com.zaxxer:HikariCP:$hikariCpVersion") {
         exclude(module = "slf4j-api") // Present in Paper
     }
 
-    compileOnly("com.destroystokyo.paper:paper-api:1.12.2-R0.1-SNAPSHOT")
-    compileOnly("com.sk89q:worldedit:6.0.0-SNAPSHOT")
+    compileOnly("com.destroystokyo.paper:paper-api:$paperApiVersion")
+    compileOnly("com.sk89q:worldedit:$worldEditVersion")
 }
 
 // Note: I would use net.minecrell.plugin-yml.bukkit, but... Goddamnit look at plugin.yml
